@@ -4,22 +4,13 @@ Welcome to **AccessHub**. This is a role-based dashboard application built with 
 
 ## Login credentials
 
-There is **no default seeded account**. Use one of these flows:
-
-1. **First Super Admin (one-time)**  
-   Open `/register/super-admin` when no Super Admin exists in the database, submit **Name**, **Email**, **Phone**, and **Password**, then you are logged in and redirected to the dashboard.
-
-2. **After that**  
-   Log in at `/login` with accounts created by a Super Admin (Admins / Users) or your Super Admin email/password.
-
-_Example (after you create users in your own DB):_  
-`email: your-admin@example.com` · `password: (the password you set)`
+email: superadmin@admin.com
+password: superadmin@admin.com
 
 ## Demo link
 
-Visit the app locally after install: [http://localhost:3000](http://localhost:3000)
+Visit the app: [https://access-hub-two.vercel.app/login](https://access-hub-two.vercel.app/login)
 
-_Deployed demo (optional):_ add your Vercel URL here when published.
 
 ## Demo video
 
@@ -132,7 +123,7 @@ All routes are **Next.js Route Handlers** under `/api`. The browser sends the JW
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/accesshub.git
+git clone https://github.com/Raja28/AccessHub.git
 cd accesshub
 npm install
 ```
@@ -162,8 +153,3 @@ Open [http://localhost:3000](http://localhost:3000) — you will be redirected t
 - `src/middleware.ts` — auth cookie gate for dashboard / auth pages  
 - `src/app/dashboard/**` — role dashboards + CRUD UI  
 
----
-
-## License
-
-Private / as per your organization’s policy.
