@@ -94,12 +94,12 @@ export function LoginForm() {
           {loading ? "Signing in..." : "Sign in"}
         </button>
 
-        <p className="mt-4 text-center text-sm text-zinc-600 dark:text-zinc-400">
+        {/* <p className="mt-4 text-center text-sm text-zinc-600 dark:text-zinc-400">
           First time?{" "}
           <Link href="/register/super-admin" className="font-medium text-zinc-900 underline dark:text-zinc-100">
             Register Super Admin
           </Link>
-        </p>
+        </p> */}
       </form>
     </div>
   );
