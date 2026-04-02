@@ -84,12 +84,12 @@ export function SuperAdminPanel() {
     try {
       setLoading({ ...loading, createAdmin: true });
       const res = await api.post<{ error?: string }>("/api/admins", adminForm);
-    if (!isOk(res.status)) {
-      setError(res.data?.error || "Create failed");
-      return;
-    }
-    setAdminForm({ name: "", email: "", phone: "", password: "" });
-    await loadAdmins();
+      if (!isOk(res.status)) {
+        setError(res.data?.error || "Create failed");
+        return;
+      }
+      setAdminForm({ name: "", email: "", phone: "", password: "" });
+      await loadAdmins();
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to create admin");
     } finally {
@@ -106,13 +106,13 @@ export function SuperAdminPanel() {
     setError(null);
     try {
       setLoading({ ...loading, createUser: true });
-    const res = await api.post<{ error?: string }>("/api/users", { ...userForm, adminId: selectedAdminId });
-    if (!isOk(res.status)) {
-      setError(res.data?.error || "Create failed");
-      return;
-    }
-    setUserForm({ name: "", email: "", phone: "", password: "" });
-    await loadUsers(selectedAdminId);
+      const res = await api.post<{ error?: string }>("/api/users", { ...userForm, adminId: selectedAdminId });
+      if (!isOk(res.status)) {
+        setError(res.data?.error || "Create failed");
+        return;
+      }
+      setUserForm({ name: "", email: "", phone: "", password: "" });
+      await loadUsers(selectedAdminId);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to create user");
     } finally {
@@ -124,13 +124,13 @@ export function SuperAdminPanel() {
     if (!confirm("Delete this admin and all users they created?")) return;
     try {
       setLoading({ ...loading, deleteAdmin: true });
-    const res = await api.delete<{ error?: string }>(`/api/admins/${id}`);
-    if (!isOk(res.status)) {
-      setError(res.data?.error || "Delete failed");
-      return;
-    }
-    if (selectedAdminId === id) setSelectedAdminId("");
-    await loadAdmins();
+      const res = await api.delete<{ error?: string }>(`/api/admins/${id}`);
+      if (!isOk(res.status)) {
+        setError(res.data?.error || "Delete failed");
+        return;
+      }
+      if (selectedAdminId === id) setSelectedAdminId("");
+      await loadAdmins();
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to delete admin");
     } finally {
@@ -142,12 +142,12 @@ export function SuperAdminPanel() {
     if (!confirm("Delete this user?")) return;
     try {
       setLoading({ ...loading, deleteUser: true });
-    const res = await api.delete<{ error?: string }>(`/api/users/${id}`);
-    if (!isOk(res.status)) {
-      setError(res.data?.error || "Delete failed");
-      return;
-    }
-    await loadUsers(selectedAdminId);
+      const res = await api.delete<{ error?: string }>(`/api/users/${id}`);
+      if (!isOk(res.status)) {
+        setError(res.data?.error || "Delete failed");
+        return;
+      }
+      await loadUsers(selectedAdminId);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to delete user");
     } finally {
@@ -160,21 +160,21 @@ export function SuperAdminPanel() {
     if (!editAdmin) return;
     try {
       setLoading({ ...loading, editAdmin: true });
-    const fd = new FormData(e.target as HTMLFormElement);
-    const payload: Record<string, string> = {
-      name: String(fd.get("name") || ""),
-      email: String(fd.get("email") || ""),
-      phone: String(fd.get("phone") || ""),
-    };
-    const pw = String(fd.get("password") || "");
-    if (pw) payload.password = pw;
-    const res = await api.patch<{ error?: string }>(`/api/admins/${editAdmin.id}`, payload);
-    if (!isOk(res.status)) {
-      setError(res.data?.error || "Update failed");
-      return;
-    }
-    setEditAdmin(null);
-    await loadAdmins();
+      const fd = new FormData(e.target as HTMLFormElement);
+      const payload: Record<string, string> = {
+        name: String(fd.get("name") || ""),
+        email: String(fd.get("email") || ""),
+        phone: String(fd.get("phone") || ""),
+      };
+      const pw = String(fd.get("password") || "");
+      if (pw) payload.password = pw;
+      const res = await api.patch<{ error?: string }>(`/api/admins/${editAdmin.id}`, payload);
+      if (!isOk(res.status)) {
+        setError(res.data?.error || "Update failed");
+        return;
+      }
+      setEditAdmin(null);
+      await loadAdmins();
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to save admin");
     }
@@ -188,21 +188,21 @@ export function SuperAdminPanel() {
     if (!editUser) return;
     try {
       setLoading({ ...loading, editUser: true });
-    const fd = new FormData(e.target as HTMLFormElement);
-    const payload: Record<string, string> = {
-      name: String(fd.get("name") || ""),
-      email: String(fd.get("email") || ""),
-      phone: String(fd.get("phone") || ""),
-    };
-    const pw = String(fd.get("password") || "");
-    if (pw) payload.password = pw;
-    const res = await api.patch<{ error?: string }>(`/api/users/${editUser.id}`, payload);
-    if (!isOk(res.status)) {
-      setError(res.data?.error || "Update failed");
-      return;
-    }
-    setEditUser(null);
-    await loadUsers(selectedAdminId);
+      const fd = new FormData(e.target as HTMLFormElement);
+      const payload: Record<string, string> = {
+        name: String(fd.get("name") || ""),
+        email: String(fd.get("email") || ""),
+        phone: String(fd.get("phone") || ""),
+      };
+      const pw = String(fd.get("password") || "");
+      if (pw) payload.password = pw;
+      const res = await api.patch<{ error?: string }>(`/api/users/${editUser.id}`, payload);
+      if (!isOk(res.status)) {
+        setError(res.data?.error || "Update failed");
+        return;
+      }
+      setEditUser(null);
+      await loadUsers(selectedAdminId);
     } catch (error) {
       setError(error instanceof Error ? error.message : "Failed to save user");
     }
@@ -256,7 +256,7 @@ export function SuperAdminPanel() {
           />
           <div className="sm:col-span-2">
             <button type="submit" className="rounded-lg bg-black px-3 py-2 text-sm text-white dark:bg-white dark:text-black">
-              { loading.createAdmin ? "Creating..." : "Create admin" }
+              {loading.createAdmin ? "Creating..." : "Create admin"}
             </button>
           </div>
         </form>
@@ -282,7 +282,7 @@ export function SuperAdminPanel() {
                       Edit
                     </button>
                     <button type="button" className="text-red-600 underline dark:text-red-400" onClick={() => deleteAdmin(a.id)}>
-                      { loading.deleteAdmin ? "Deleting..." : "Delete" }
+                      Delete
                     </button>
                   </td>
                 </tr>
@@ -345,7 +345,7 @@ export function SuperAdminPanel() {
             />
             <div className="sm:col-span-2">
               <button type="submit" className="rounded-lg bg-black px-3 py-2 text-sm text-white dark:bg-white dark:text-black">
-                 { loading.createUser ? "Creating..." : "Create user" }
+                {loading.createUser ? "Creating..." : "Create user"}
               </button>
             </div>
           </form>
@@ -392,7 +392,7 @@ export function SuperAdminPanel() {
             <input name="password" type="password" placeholder="New password (optional)" className="mt-2 w-full rounded border px-2 py-1.5 text-sm" />
             <div className="mt-3 flex gap-2">
               <button type="submit" className="rounded bg-black px-3 py-1.5 text-sm text-white dark:bg-white dark:text-black">
-                { loading.editAdmin ? "Saving..." : "Save" }
+                {loading.editAdmin ? "Saving..." : "Save"}
               </button>
               <button type="button" className="rounded border px-3 py-1.5 text-sm" onClick={() => setEditAdmin(null)}>
                 Cancel
@@ -412,7 +412,7 @@ export function SuperAdminPanel() {
             <input name="password" type="password" placeholder="New password (optional)" className="mt-2 w-full rounded border px-2 py-1.5 text-sm" />
             <div className="mt-3 flex gap-2">
               <button type="submit" className="rounded bg-black px-3 py-1.5 text-sm text-white dark:bg-white dark:text-black">
-                { loading.editUser ? "Saving..." : "Save" }
+                {loading.editUser ? "Saving..." : "Save"}
               </button>
               <button type="button" className="rounded border px-3 py-1.5 text-sm" onClick={() => setEditUser(null)}>
                 Cancel
